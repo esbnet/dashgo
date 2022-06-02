@@ -64,9 +64,8 @@ export default function UserList() {
                                         fontSize={"sm"}
                                         colorScheme="purple"
                                         leftIcon={<Icon as={RiPencilLine} />}
-                                    >
-                                        Editar
-                                    </Button>
+                                        cursor="pointer"
+                                    >Editar</Button>
 
                                 </Td>
                             </Tr>
@@ -88,9 +87,8 @@ export default function UserList() {
                                         fontSize={"sm"}
                                         colorScheme="purple"
                                         leftIcon={<Icon as={RiPencilLine} />}
-                                    >
-                                        Editar
-                                    </Button>
+                                        cursor="pointer"
+                                    >Editar</Button>
 
                                 </Td>
                             </Tr>
@@ -107,14 +105,14 @@ export default function UserList() {
                                 <Td>04 de Abril de 2021</Td>
                                 <Td>
                                     <Button
+                                        title="Editar"
                                         as={"a"}
                                         size="sm"
                                         fontSize={"sm"}
                                         colorScheme="purple"
-                                        leftIcon={<Icon as={RiPencilLine} />}
-                                    >
-                                        Editar
-                                    </Button>
+                                        leftIcon={<Icon as={RiPencilLine}/>}
+                                        cursor="pointer"
+                                    />
 
                                 </Td>
                             </Tr>
