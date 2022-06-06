@@ -6,6 +6,7 @@ import {
 import { Input } from "../components/Form/Input"
 
 export default function Home() {
+
     return (
         <Flex
             w="100vw"

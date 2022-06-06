@@ -15,15 +15,16 @@ const options = {
   },
   grid: { show: false, },
   dataLabels: { enabled: false },
-  tooltip: { enabled: false },
+  tooltip: {
+    enabled: true,
+    theme: "dark",
+    x: { show: false }, 
+    y: { show: false }
+  },
   xaxis: {
     type: "datetime",
-    axisBorder: {
-      color: theme.colors.blue[600],
-    },
-    axisTicks: {
-      color: theme.colors.blue[600],
-    },
+    axisBorder: { color: theme.colors.blue[600] },
+    axisTicks: { color: theme.colors.blue[600] },
     categories: [
       '2021-03-18T00:00:00.000Z',
       '2021-03-19T00:00:00.000Z',
@@ -43,7 +44,7 @@ const options = {
     },
   },
 }
-const series = [{ name: "series-1", data: [320, 40, 500, 51, 402, 109, 250] }]
+const series = [{ name: "series-1", data: [1000, 40, 500, 51, 402, 109, 250] }]
 
 function Dashboard() {
   return (
@@ -53,7 +54,7 @@ function Dashboard() {
         <Sidebar />
 
         <SimpleGrid flex={1} gap="4" minChildWidth="320px" alignContent={"flex-start"}>
-          <Box p={[6,8]} bg="blue.800" borderRadius={8}>
+          <Box p={[6, 8]} bg="blue.800" borderRadius={8}>
             <Text fontSize="lg" mb={4}>Inscritos da semana</Text>
 
             <Chart options={options} series={series} type="area" height={160} />
