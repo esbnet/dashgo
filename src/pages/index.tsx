@@ -11,8 +11,8 @@ interface IFormInputs {
 }
 
 const signFormSchema = yup.object().shape({
-    email: yup.string().email("Email inválido").required("Email obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
+    email: yup.string().email("Email inválido").required("Email é obrigatório"),
+    password: yup.string().required("Senha é obrigatória"),
 })
 
 export default function Home() {
@@ -50,16 +50,16 @@ export default function Home() {
                         type="email"
                         label="E-mail"
                         {...register("email", { required: true })}
-                    error = {errors.email}
+                        error={errors.email}
 
                     />
                     <Input
                         name="password"
-                        type="password" 
+                        type="password"
                         label="Senha"
                         {...register("password", { required: true })}
-                        error = {errors.password}
-                        />
+                        error={errors.password}
+                    />
                 </Stack>
                 <Button
                     type="submit"

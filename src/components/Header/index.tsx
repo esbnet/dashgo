@@ -5,7 +5,7 @@ import { useSidebarDrawer } from "../../contexts/SidebarDrawerContext";
 import Logo from "./Logo";
 import NotificationNAv from "./NotificationNav";
 import { Profile } from "./Profile";
-import SearchBox from "./SeachBox";
+import { SearchBox } from "./SeachBox";
 
 export function Header() {
     const { onOpen } = useSidebarDrawer()
