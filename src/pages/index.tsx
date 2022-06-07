@@ -2,15 +2,25 @@ import { Flex, Button, Stack } from "@chakra-ui/react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "../components/Form/Input"
 
-interface FormData {
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+
+interface IFormInputs {
     email: string
     password: string
 }
 
-export default function Home() {
-    const { register, handleSubmit, formState } = useForm()
+const signFormSchema = yup.object().shape({
+    email: yup.string().email("Email inválido").required("Email obrigatório"),
+    password: yup.string().required("Senha obrigatória"),
+})
 
-    const handleSignIn: SubmitHandler<FormData> = async (data) => {
+export default function Home() {
+    const { register, handleSubmit, formState, formState: { errors } } = useForm<IFormInputs>(
+        { resolver: yupResolver(signFormSchema) }
+    )
+
+    const handleSignIn: SubmitHandler<IFormInputs> = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 1000))
         console.log(data)
     }
@@ -35,8 +45,21 @@ export default function Home() {
                 onSubmit={handleSubmit(handleSignIn)}
             >
                 <Stack spacing={4}>
-                    <Input name="email" type="email" label="E-mail"  {...register("email", { required: true })} />
-                    <Input name="password" type="password" label="Senha"  {...register("password", { required: true })} />
+                    <Input
+                        name="email"
+                        type="email"
+                        label="E-mail"
+                        {...register("email", { required: true })}
+                    error = {errors.email}
+
+                    />
+                    <Input
+                        name="password"
+                        type="password" l
+                        abel="Senha"
+                        {...register("password", { required: true })}
+                        error = {errors.password}
+                        />
                 </Stack>
                 <Button
                     type="submit"
