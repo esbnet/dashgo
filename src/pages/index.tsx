@@ -55,8 +55,8 @@ export default function Home() {
                     />
                     <Input
                         name="password"
-                        type="password" l
-                        abel="Senha"
+                        type="password" 
+                        label="Senha"
                         {...register("password", { required: true })}
                         error = {errors.password}
                         />
