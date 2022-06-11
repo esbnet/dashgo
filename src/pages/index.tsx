@@ -4,6 +4,7 @@ import { Input } from "../components/Form/Input"
 
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useState } from "react"
 
 interface IFormInputs {
     email: string
@@ -16,6 +17,7 @@ const signFormSchema = yup.object().shape({
 })
 
 export default function Home() {
+    
     const { register, handleSubmit, formState, formState: { errors } } = useForm<IFormInputs>(
         { resolver: yupResolver(signFormSchema) }
     )

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 
 import {
@@ -11,15 +12,9 @@ import Pagination from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
 import { useUsers } from "../../services/hooks/useUsers";
 
-type User = {
-    id: number;
-    name: string;
-    email: string;
-    createdAt: string;
-};
-
 export default function UserList() {
-    const { data, isLoading, isFetching, error } = useUsers()
+    const [page, setPage] = useState(1)
+    const { data, isLoading, isFetching, error } = useUsers(page)
 
     console.log(data)
 
@@ -73,7 +68,7 @@ export default function UserList() {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {data.map(user => {
+                                    {data.users.map(user => {
                                         return (
                                             <>
                                                 <Tr>
@@ -103,10 +98,10 @@ export default function UserList() {
                                     })}
                                 </Tbody>
                             </Table >
-                            <Pagination 
-                                totalCountOfRegisters={200}
-                                currentPage={5}
-                                onPageChange={()=>{}}
+                            <Pagination
+                                totalCountOfRegisters={data.totalCount}
+                                currentPage={page}
+                                onPageChange={setPage}
                             />
                         </>)
                     }
