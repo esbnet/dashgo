@@ -21,6 +21,8 @@ type User = {
 export default function UserList() {
     const { data, isLoading, isFetching, error } = useUsers()
 
+    console.log(data)
+
     const isWideVersion = useBreakpointValue({
         base: false,
         lg: true,
@@ -55,7 +57,7 @@ export default function UserList() {
                         </Flex>
                     ) : error ? (
                         <Flex justify={"center"}>
-                            <Text>Erro</Text>
+                            <Text>Erro ao carregar dados de usuários...</Text>
                         </Flex>
                     ) : (
                         <>
@@ -84,7 +86,7 @@ export default function UserList() {
                                                             <Text fontSize={"sm"} fontWeight={"small"} color="blue.300">{user.email}</Text>
                                                         </Box>
                                                     </Td>
-                                                    {isWideVersion && <Td>{user.created_at}</Td>}
+                                                    {isWideVersion && <Td>{user.createdAt}</Td>}
                                                     <Td>
                                                         <Button
                                                             as={"a"}
@@ -101,7 +103,11 @@ export default function UserList() {
                                     })}
                                 </Tbody>
                             </Table >
-                            <Pagination />
+                            <Pagination 
+                                totalCountOfRegisters={200}
+                                currentPage={5}
+                                onPageChange={()=>{}}
+                            />
                         </>)
                     }
                 </Box >

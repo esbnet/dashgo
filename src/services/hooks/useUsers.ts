@@ -15,7 +15,7 @@ export async function getUsers(): Promise<User[]> {
 			id: user.id,
 			name: user.name,
 			email: user.email,
-			created_at: new Date(user.createdAt).toLocaleString("pt-BR", {
+			createdAt: new Date(user.createdAt).toLocaleString("pt-BR", {
 				day: "2-digit",
 				month: "long",
 				year: "numeric",
