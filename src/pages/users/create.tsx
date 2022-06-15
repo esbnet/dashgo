@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { Input } from "../../components/Form/Input";
 
@@ -9,6 +10,10 @@ import Sidebar from "../../components/Sidebar";
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import { useMutation } from "react-query";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
 
 interface IFormInputs {
     name: string
@@ -39,13 +44,31 @@ const userFormSchema = yup.object().shape({
 })
 
 export default function CreateUser() {
+    const router = useRouter();
+
+    const createUser = useMutation(async (user: IFormInputs) => {
+        const response = await api.post("users", {
+            user: {
+                ...user,
+                create_at: new Date()
+            }
+        })
+
+        return response.data.user;
+    }, {
+        onSuccess: () => {
+            alert(`Usuário criado com sucesso! \n`);
+            queryClient.invalidateQueries("users");
+        }
+    });
+
     const { register, handleSubmit, formState, formState: { errors } } = useForm<IFormInputs>(
         { resolver: yupResolver(userFormSchema) }
     )
 
     const handleCreateUser: SubmitHandler<IFormInputs> = async (data) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        console.log(data)
+        await createUser.mutateAsync(data);
+        router.push("/users");
     }
 
     return (
